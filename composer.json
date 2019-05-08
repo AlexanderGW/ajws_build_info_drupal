@@ -1,0 +1,15 @@
+{
+  "name": "alexandergw/jwsa_build_info_drupal",
+  "type": "drupal-module",
+  "description": "Provides build information for JWSA",
+  "homepage": "https://github.com/AlexanderGW/jwsa_build_info_drupal",
+  "license": "GNU",
+  "authors": [
+    {
+      "name": "Alexander Gailey-White",
+      "email": "alex@gailey-white.com",
+      "homepage": "https://gailey-white.com",
+      "role": "Developer"
+    }
+  ],
+}
