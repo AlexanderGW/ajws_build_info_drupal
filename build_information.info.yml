@@ -1,6 +1,0 @@
-name: Build information
-description: Inject build date, ID, and name into Drupal status report
-package: Custom
-type: module
-version: 1.0
-core: 8.x

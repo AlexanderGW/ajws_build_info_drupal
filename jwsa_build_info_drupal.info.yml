@@ -1,0 +1,6 @@
+name: Build information (JWSA)
+description: Inject build date, number, and name into Drupal status report
+package: Custom
+type: module
+version: 1.0
+core: 8.x

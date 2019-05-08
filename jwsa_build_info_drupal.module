@@ -4,7 +4,7 @@
  * Implements hook_requirements().
  */
 
-function build_information_requirements($phase) {
+function jwsa_build_info_drupal_requirements($phase) {
   $requirements = [];
   $build_id = $date = NULL;
 
