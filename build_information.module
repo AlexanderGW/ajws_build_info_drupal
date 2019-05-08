@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * Implements hook_requirements().
+ */
+
+function build_information_requirements($phase) {
+  $requirements = [];
+  $build_id = $date = NULL;
+
+  // TODO: Use DRUPAL_ROOT? Depths may vary with custom deploy paths
+  $build_file = realpath(dirname(__FILE__) . '/../../../../../../.active-build');
+  $build_path = dirname(realpath(dirname(__FILE__) . '/../../../../..'));
+  $build_name = array_pop(explode('/',$build_path));
+
+  if (file_exists($build_file)) {
+    $build_id = intval(file_get_contents($build_file));
+    $timestamp = filemtime($build_file);
+
+    $date = \Drupal::service('date.formatter')->format($timestamp);
+  }
+
+  $requirements['build_information'] = [
+    'title' => t('Build information'),
+    'value' => [
+      '#markup' => $build_name . ($build_id ? " (#{$build_id})" : NULL)
+    ],
+    'description' => $date ? 'Deployed on ' . $date : NULL,
+    'severity' => REQUIREMENT_INFO
+  ];
+
+  return $requirements;
+}
