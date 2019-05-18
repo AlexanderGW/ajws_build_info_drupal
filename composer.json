@@ -3,7 +3,7 @@
   "type": "drupal-module",
   "description": "Provides build information for JWSA",
   "homepage": "https://github.com/AlexanderGW/jwsa_build_info_drupal",
-  "license": "GNU",
+  "license": "MIT",
   "authors": [
     {
       "name": "Alexander Gailey-White",
