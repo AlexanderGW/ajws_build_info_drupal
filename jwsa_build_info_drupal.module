@@ -6,24 +6,28 @@
 
 function jwsa_build_info_drupal_requirements($phase) {
   $requirements = [];
-  $build_id = $date = NULL;
+  $build_number = $date = NULL;
 
-  // TODO: Use DRUPAL_ROOT? Depths may vary with custom deploy paths
-  $build_file = realpath(dirname(__FILE__) . '/../../../../../../.active-build');
-  $build_path = dirname(realpath(dirname(__FILE__) . '/../../../../..'));
-  $build_name = array_pop(explode('/',$build_path));
+  // Attempt to access the file, in the deployed project path
+  $build_file = realpath(DRUPAL_ROOT . '/../../../.active-build');
+
+  // Attempt the access the directory name of the build path
+  $build_path = dirname(realpath(DRUPAL_ROOT . '/../..'));
 
   if (file_exists($build_file)) {
-    $build_id = intval(file_get_contents($build_file));
+    $build_name = array_pop(explode('/',$build_path));
+    $build_number = intval(file_get_contents($build_file));
     $timestamp = filemtime($build_file);
 
     $date = \Drupal::service('date.formatter')->format($timestamp);
+  } else {
+    $build_name = '<em>Unknown</em>';
   }
 
   $requirements['build_information'] = [
     'title' => t('Build information'),
     'value' => [
-      '#markup' => $build_name . ($build_id ? " (#{$build_id})" : NULL)
+      '#markup' => $build_name . ($build_number ? " (#{$build_number})" : NULL)
     ],
     'description' => $date ? 'Deployed on ' . $date : NULL,
     'severity' => REQUIREMENT_INFO
