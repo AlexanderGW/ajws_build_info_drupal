@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Displays the active build information for a JWSA deployment
+ *
  * Implements hook_requirements().
  */
 
@@ -15,12 +17,16 @@ function jwsa_build_info_drupal_requirements($phase) {
   $build_path = dirname(realpath(DRUPAL_ROOT . '/../..'));
 
   if (file_exists($build_file)) {
-    $build_name = array_pop(explode('/',$build_path));
+  	$array = explode('/',$build_path);
+    $build_name = array_pop($array);
     $build_number = intval(file_get_contents($build_file));
     $timestamp = filemtime($build_file);
 
     $date = \Drupal::service('date.formatter')->format($timestamp);
-  } else {
+  }
+
+  // Not known
+  else {
     $build_name = '<em>Unknown</em>';
   }
 
